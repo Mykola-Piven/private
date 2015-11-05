@@ -6,6 +6,10 @@ Application is used by two types of users:
 2. Users - vote on which restaurant they want to have a lunch. Only one vote from one user is possible. 
    If User changes his mind, he be able vote againe till 11:00.
    
+PREREQUISITES:
+It is Maven project with JAVA 8 and Spring-Boot with embedded Tomcat.
+Note: For easy run aplication use: mvn spring-boot:run
+
 URL:
 1. To diplay lunch menu (request type GET):
 	/admin/lunch or /admin/lunch?restaurant=:restaurant_name 
