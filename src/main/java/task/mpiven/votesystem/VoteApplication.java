@@ -15,10 +15,10 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import task.mpiven.votesystem.domain.entity.Dish;
-import task.mpiven.votesystem.domain.entity.LanchMenu;
+import task.mpiven.votesystem.domain.entity.LunchMenu;
 import task.mpiven.votesystem.domain.entity.Restaurant;
 import task.mpiven.votesystem.domain.repository.DishRepository;
-import task.mpiven.votesystem.domain.repository.LanchMenuRepository;
+import task.mpiven.votesystem.domain.repository.LunchMenuRepository;
 import task.mpiven.votesystem.domain.repository.RestaurantRepository;
 import task.mpiven.votesystem.web.view.Constants;
 
@@ -37,11 +37,11 @@ public class VoteApplication {
 
 	@Bean
 	public CommandLineRunner createDefaultData(RestaurantRepository restaurantRepository,
-			LanchMenuRepository lanchMenuRepository, DishRepository dishRepository) {
+			LunchMenuRepository lunchMenuRepository, DishRepository dishRepository) {
 		return (args) -> {
 
 			Restaurant pizzaCelentano = new Restaurant("Pizza Celentano");
-			LanchMenu menuPizzaCelentano = new LanchMenu(LocalDate.now().format(Constants.DATE_FORMATTER), pizzaCelentano);
+			LunchMenu menuPizzaCelentano = new LunchMenu(LocalDate.now().format(Constants.DATE_FORMATTER), pizzaCelentano);
 			Set<Dish> dishPizzaCelentano = new HashSet<>();
 
 			dishPizzaCelentano.add(new Dish("Pizza Margarita", 55.50, menuPizzaCelentano));
@@ -51,11 +51,11 @@ public class VoteApplication {
 			dishPizzaCelentano.add(new Dish("Black Tea", 1.50, menuPizzaCelentano));
 
 			restaurantRepository.save(pizzaCelentano);
-			lanchMenuRepository.save(menuPizzaCelentano);
+			lunchMenuRepository.save(menuPizzaCelentano);
 			dishRepository.save(dishPizzaCelentano);
 
 			Restaurant odessa = new Restaurant("Odessa");
-			LanchMenu menuOdessa = new LanchMenu(LocalDate.now().format(Constants.DATE_FORMATTER), odessa);
+			LunchMenu menuOdessa = new LunchMenu(LocalDate.now().format(Constants.DATE_FORMATTER), odessa);
 			Set<Dish> dishOdessa = new HashSet<>();
 
 			dishOdessa.add(new Dish("Chicken Soup", 13.50, menuOdessa));
@@ -65,14 +65,14 @@ public class VoteApplication {
 			dishOdessa.add(new Dish("Black Tea", 1.70, menuOdessa));
 
 			restaurantRepository.save(odessa);
-			lanchMenuRepository.save(menuOdessa);
+			lunchMenuRepository.save(menuOdessa);
 			dishRepository.save(dishOdessa);
 		
 			// fetch all menus
-			log.info("LanchMenu findAll():");
+			log.info("LunchMenu findAll():");
 			log.info("-------------------------------");
-			for (LanchMenu lanchMenu : lanchMenuRepository.findAll()) {
-				log.info(lanchMenu.toString());
+			for (LunchMenu lunchMenu : lunchMenuRepository.findAll()) {
+				log.info(lunchMenu.toString());
 			}
 			log.info("-------------------------------");
 		};

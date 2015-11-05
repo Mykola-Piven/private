@@ -9,7 +9,7 @@ import org.hibernate.type.SerializationException;
 import org.springframework.stereotype.Component;
 
 import task.mpiven.votesystem.domain.entity.Dish;
-import task.mpiven.votesystem.domain.entity.LanchMenu;
+import task.mpiven.votesystem.domain.entity.LunchMenu;
 import task.mpiven.votesystem.domain.entity.Restaurant;
 import task.mpiven.votesystem.web.resource.Response;
 
@@ -22,8 +22,8 @@ public class JsonSerializer {
 			JSONWriter jsonWriter = new JSONWriter(writer);
 			jsonWriter.object();
 			jsonWriter.key(Constants.RESPONSE).object();
-			if (response.getLanchMenus() != null && !response.getLanchMenus().isEmpty()) {
-				serializeLanchMenus(response, jsonWriter);
+			if (response.getLunchMenus() != null && !response.getLunchMenus().isEmpty()) {
+				serializeLunchMenus(response, jsonWriter);
 			} else if (response.getVoteResults() != null && !response.getVoteResults().isEmpty()) {
 				serializeVoteResults(response, jsonWriter);
 			}
@@ -34,23 +34,23 @@ public class JsonSerializer {
 		}
 	}
 
-	private void serializeLanchMenus(Response response, JSONWriter jsonWriter) {
+	private void serializeLunchMenus(Response response, JSONWriter jsonWriter) {
 		serializeError(response, jsonWriter);
-		jsonWriter.key(Constants.LANCH_MENU);
+		jsonWriter.key(Constants.LUNCH_MENU);
 		jsonWriter.array();
-		for (LanchMenu lanchMenu : response.getLanchMenus()) {
-			serializeLanchMenu(lanchMenu, jsonWriter);
+		for (LunchMenu lunchMenu : response.getLunchMenus()) {
+			serializeLunchMenu(lunchMenu, jsonWriter);
 		}
 		jsonWriter.endArray();
 	}
 
-	private void serializeLanchMenu(LanchMenu lanchMenu, JSONWriter jsonWriter) {
+	private void serializeLunchMenu(LunchMenu lunchMenu, JSONWriter jsonWriter) {
 		jsonWriter.object();
-		serializeRestaurant(lanchMenu.getRestaurant(), jsonWriter);
-		serializeField(Constants.DATE, lanchMenu.getMenuDate(), jsonWriter);
+		serializeRestaurant(lunchMenu.getRestaurant(), jsonWriter);
+		serializeField(Constants.DATE, lunchMenu.getMenuDate(), jsonWriter);
 		jsonWriter.key(Constants.DISH);
 		jsonWriter.array();
-		for (Dish dish : lanchMenu.getDish()) {
+		for (Dish dish : lunchMenu.getDish()) {
 			serializeDish(dish, jsonWriter);
 		}
 		jsonWriter.endArray();

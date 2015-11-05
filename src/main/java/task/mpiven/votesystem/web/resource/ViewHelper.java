@@ -23,21 +23,21 @@ public class ViewHelper {
 		return modelAndView;
 	}
 
-	public Response getLanchMenu(RequestSettings settings) {
+	public Response getLunchMenu(RequestSettings settings) {
 		Response response = new Response();
-		response.setLanchMenus(serviceDelegate.getLanchMenus(settings.getRestaurantName(), settings.getCurrentDate()));
+		response.setLunchMenus(serviceDelegate.getLunchMenus(settings.getRestaurantName(), settings.getCurrentDate()));
 		return response;
 	}
 
-	public Response createLanchMenu(RequestSettings settings) {
+	public Response createLunchMenu(RequestSettings settings) {
 		Response response = new Response();
-		String status = serviceDelegate.createLanchMenu(settings.getRestaurantName(), settings.getMenuDate(),
+		String status = serviceDelegate.createLunchMenu(settings.getRestaurantName(), settings.getMenuDate(),
 				settings.getDishes());
 		String message;
 		if (status.equals(Constants.STATUS_OK)) {
-			message = "Lanch Menu is created Successfully";
+			message = "Lunch Menu is created Successfully";
 		} else {
-			message = "Lanch Menu is NOT created";
+			message = "Lunch Menu is NOT created";
 		}
 		response.setMessage(message);
 		return response;

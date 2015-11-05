@@ -13,7 +13,7 @@ public class Constants {
 	public static final String STATUS_OK = "OK!";
 	public static final String STATUS_FAIL = "FAIL!!!";
 	public static final String RESPONSE = "response";
-	public static final String LANCH_MENU = "lanch_menu ";
+	public static final String LUNCH_MENU = "lunch_menu ";
 	public static final String ERROR = "error";
 	public static final String MESSAGE = "message";
 	public static final String DATE = "date";

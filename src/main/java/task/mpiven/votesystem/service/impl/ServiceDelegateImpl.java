@@ -12,21 +12,21 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import task.mpiven.votesystem.domain.entity.Dish;
-import task.mpiven.votesystem.domain.entity.LanchMenu;
+import task.mpiven.votesystem.domain.entity.LunchMenu;
 import task.mpiven.votesystem.domain.entity.Restaurant;
 import task.mpiven.votesystem.domain.entity.Vote;
 import task.mpiven.votesystem.domain.repository.DishRepository;
-import task.mpiven.votesystem.domain.repository.LanchMenuRepository;
+import task.mpiven.votesystem.domain.repository.LunchMenuRepository;
 import task.mpiven.votesystem.domain.repository.RestaurantRepository;
 import task.mpiven.votesystem.domain.repository.VoteRepository;
 import task.mpiven.votesystem.service.IServiceDelegate;
 import task.mpiven.votesystem.web.view.Constants;
 
-@Service//("lanchMenuService")
+@Service//("lunchMenuService")
 public class ServiceDelegateImpl implements IServiceDelegate {
 
 	@Autowired
-	private LanchMenuRepository lanchMenuRepository;
+	private LunchMenuRepository lunchMenuRepository;
 	@Autowired
 	private RestaurantRepository restaurantRepository;
 	@Autowired
@@ -35,19 +35,19 @@ public class ServiceDelegateImpl implements IServiceDelegate {
 	private VoteRepository voteRepository;
 
 	@Override
-	public List<LanchMenu> getLanchMenus(String restaurantName, String menuDate) {
-		List<LanchMenu> result = Collections.emptyList();
+	public List<LunchMenu> getLunchMenus(String restaurantName, String menuDate) {
+		List<LunchMenu> result = Collections.emptyList();
 		if (restaurantName != null && !restaurantName.isEmpty()) {
 			Restaurant restaurant = restaurantRepository.findByNameIgnoreCase(restaurantName);
-			result = (List<LanchMenu>) lanchMenuRepository.findByRestaurantAndMenuDate(restaurant, menuDate);
+			result = (List<LunchMenu>) lunchMenuRepository.findByRestaurantAndMenuDate(restaurant, menuDate);
 		} else {
-			result = (List<LanchMenu>) lanchMenuRepository.findByMenuDate(menuDate);
+			result = (List<LunchMenu>) lunchMenuRepository.findByMenuDate(menuDate);
 		}
 		return result;
 	}
 
 	@Override
-	public String createLanchMenu(String restaurantName, String menuDate, Map<String, Double> dishMap) {
+	public String createLunchMenu(String restaurantName, String menuDate, Map<String, Double> dishMap) {
 		String status = Constants.STATUS_FAIL;
 		if (restaurantName != null && restaurantName != null && dishMap != null && !restaurantName.isEmpty()
 				&& !menuDate.isEmpty() && !dishMap.isEmpty()) {
@@ -56,13 +56,13 @@ public class ServiceDelegateImpl implements IServiceDelegate {
 				restaurant = new Restaurant(restaurantName);	
 				restaurantRepository.save(restaurant);
 			}
-			LanchMenu lanchMenu = new LanchMenu(menuDate, restaurant);
+			LunchMenu lunchMenu = new LunchMenu(menuDate, restaurant);
 			Set<Dish> dishSet = new HashSet<>();
 			for (String dishName : dishMap.keySet()) {
-				Dish dish = new Dish(dishName, dishMap.get(dishName), lanchMenu);
+				Dish dish = new Dish(dishName, dishMap.get(dishName), lunchMenu);
 				dishSet.add(dish);
 			}
-			lanchMenuRepository.save(lanchMenu);
+			lunchMenuRepository.save(lunchMenu);
 			dishRepository.save(dishSet);
 			status = Constants.STATUS_OK;
 		}

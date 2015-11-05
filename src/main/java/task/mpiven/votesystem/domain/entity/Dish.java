@@ -24,15 +24,15 @@ public class Dish {
 	private Double price;
 
 	@ManyToOne
-	private LanchMenu lanchMenu;
+	private LunchMenu lunchMenu;
 
 	protected Dish() {
 	}
 
-	public Dish(String name, Double price, LanchMenu lanchMenu) {
+	public Dish(String name, Double price, LunchMenu lunchMenu) {
 		setName(name);
 		setPrice(price);
-		setLanchMenu(lanchMenu);
+		setLunchMenu(lunchMenu);
 	}
 
 	public Long getId() {
@@ -59,12 +59,12 @@ public class Dish {
 		this.price = price;
 	}
 
-	public LanchMenu getLanchMenu() {
-		return lanchMenu;
+	public LunchMenu getLunchMenu() {
+		return lunchMenu;
 	}
 
-	public void setLanchMenu(LanchMenu lanchMenu) {
-		this.lanchMenu = lanchMenu;
+	public void setLunchMenu(LunchMenu lunchMenu) {
+		this.lunchMenu = lunchMenu;
 	}
 	
 	@Override

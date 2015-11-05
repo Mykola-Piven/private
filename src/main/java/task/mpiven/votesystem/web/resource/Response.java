@@ -5,14 +5,14 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
-import task.mpiven.votesystem.domain.entity.LanchMenu;
+import task.mpiven.votesystem.domain.entity.LunchMenu;
 import task.mpiven.votesystem.domain.entity.Restaurant;
 
 public class Response implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	private Error error;
-	private List<LanchMenu> lanchMenus = Collections.emptyList();
+	private List<LunchMenu> lunchMenus = Collections.emptyList();
 	private String message;
 	private Map<Restaurant,Integer> voteResults;
 
@@ -25,12 +25,12 @@ public class Response implements Serializable {
 		this.setError(error);
 	}
 
-	public List<LanchMenu> getLanchMenus() {
-		return lanchMenus;
+	public List<LunchMenu> getLunchMenus() {
+		return lunchMenus;
 	}
 
-	public void setLanchMenus(List<LanchMenu> lanchMenus) {
-		this.lanchMenus = lanchMenus;
+	public void setLunchMenus(List<LunchMenu> lunchMenus) {
+		this.lunchMenus = lunchMenus;
 	}
 
 	public Error getError() {

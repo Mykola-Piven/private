@@ -17,7 +17,7 @@ import org.hibernate.annotations.FetchMode;
 
 @Entity
 @Table(name = "LAUNCH_MENU")
-public class LanchMenu {
+public class LunchMenu {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -31,15 +31,15 @@ public class LanchMenu {
 	@JoinColumn(name = "RESTAURANT_ID")
 	private Restaurant restaurant;
 
-	@OneToMany(mappedBy = "lanchMenu")
+	@OneToMany(mappedBy = "lunchMenu")
 	@Fetch(FetchMode.JOIN)
 	private Set<Dish> dish;
 
-	protected LanchMenu() {
+	protected LunchMenu() {
 	}
 
-	public LanchMenu(String lanchMenuDate, Restaurant restaurant) {
-		setMenuDate(lanchMenuDate);
+	public LunchMenu(String lunchMenuDate, Restaurant restaurant) {
+		setMenuDate(lunchMenuDate);
 		setRestaurant(restaurant);
 	}
 
@@ -77,7 +77,7 @@ public class LanchMenu {
 
 	@Override
 	public String toString() {
-		return "LanchMenu [Restaurant=" + restaurant + ", Data=" + menuDate + ", Dishes=" + dish + "]";
+		return "LunchMenu [Restaurant=" + restaurant + ", Data=" + menuDate + ", Dishes=" + dish + "]";
 	}
 
 }

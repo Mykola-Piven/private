@@ -24,17 +24,17 @@ public class Controller {
 	@Autowired
 	protected ViewHelper viewHelper;
 	
-	private static final Pattern LANCH_MENU_PATTERN = Pattern.compile("(.*),([0-9]{2}\\/[0-9]{2}\\/[0-9]{4}),\\[(.*)\\]");
+	private static final Pattern LUNCH_MENU_PATTERN = Pattern.compile("(.*),([0-9]{2}\\/[0-9]{2}\\/[0-9]{4}),\\[(.*)\\]");
 	private static final Pattern VOTE_PATTERN = Pattern.compile("(.d*),(.*)");
 
 
-	@RequestMapping(value = { "/admin/lanch", "/user/lanch" }, method = RequestMethod.GET)
-	public ModelAndView getLanchMenu(
+	@RequestMapping(value = { "/admin/lunch", "/user/lunch" }, method = RequestMethod.GET)
+	public ModelAndView getLunchMenu(
 			@RequestParam(value = "restaurant", required = false) String restaurantName) {
 		RequestSettings settings = new RequestSettings();
 		settings.setRestaurantName(restaurantName);
 		settings.setCurrentDate(viewHelper.getCurrentDate());
-		Response response = viewHelper.getLanchMenu(settings);
+		Response response = viewHelper.getLunchMenu(settings);
 		return viewHelper.generateView(Constants.JSON_VIEW, response);
 	}
 
@@ -46,12 +46,12 @@ public class Controller {
 		return viewHelper.generateView(Constants.JSON_VIEW, response);
 	}
 
-	@RequestMapping(value = "/admin/lanch", method = RequestMethod.POST)
-	public ModelAndView createLanchMenu(@RequestBody String body) {
+	@RequestMapping(value = "/admin/lunch", method = RequestMethod.POST)
+	public ModelAndView createLunchMenu(@RequestBody String body) {
 
-        Matcher matcher = LANCH_MENU_PATTERN.matcher(body);
+        Matcher matcher = LUNCH_MENU_PATTERN.matcher(body);
         if (!matcher.find()) {
-            throw new IllegalArgumentException("Incorrect format of Lanch Menu param. Received: " + body);
+            throw new IllegalArgumentException("Incorrect format of Lunch Menu param. Received: " + body);
         }
         String restaurantName = matcher.group(1);
         String menuDate = matcher.group(2);
@@ -70,7 +70,7 @@ public class Controller {
 		settings.setMenuDate(menuDate);
 		settings.setDishes(dishMap);
 
-		Response response = viewHelper.createLanchMenu(settings);;
+		Response response = viewHelper.createLunchMenu(settings);;
 		return viewHelper.generateView(Constants.TEXT_VIEW, response);
    }
  
